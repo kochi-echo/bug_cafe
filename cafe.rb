@@ -19,9 +19,11 @@ def input_order_number(menus)
   loop do
     print '>'
     order_str = gets
-    raise "注文を中止します。またのご利用お待ちしております。" if order_str == "q\n"
+    raise '注文を中止します。またのご利用お待ちしております。' if order_str == "q\n"
+
     order_number = order_str.to_i - 1
     break if order_number >= 0 && order_number < menus.size
+
     puts '範囲外です。もう一度番号でご注文ください。(注文を中止する場合はqを押してください。)'
   end
   order_number
@@ -45,6 +47,6 @@ begin
 
   total = DRINKS[order_drink][:price].to_i + FOODS[order_food][:price].to_i
   puts "お会計は#{total}円になります。ありがとうございました！"
-rescue => error_massage
-  puts error_massage
+rescue StandardError => e
+  puts e
 end
